@@ -152,7 +152,6 @@
     <link rel="preconnect" href="https://images.unsplash.com" />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-    <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
         /* Custom CSS */
@@ -736,9 +735,8 @@
                 const result = await response.json();
 
                 if (response.ok) {
-                    // Success - show clean message only
                     showSuccessMessage("Request Submitted Successfully! We've received your request and sent you a confirmation email. We'll contact you within 2 hours during business hours.");
-                    this.reset(); // Clear form
+                    this.reset();
                 } else {
                     throw new Error(result.error || 'Failed to submit request');
                 }
@@ -763,7 +761,7 @@
             }
         });
 
-                // Toast notification functions
+        // Toast notification functions
         function showSuccessMessage(message) {
             const toast = document.createElement('div');
             toast.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg z-50 max-w-md';
@@ -793,8 +791,6 @@
             document.body.appendChild(toast);
             setTimeout(() => toast.remove(), 5000);
         }
-
-                // Website loaded successfully
     </script>
 </body>
 </html>
