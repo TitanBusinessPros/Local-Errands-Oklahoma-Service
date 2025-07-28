@@ -739,8 +739,8 @@
                 const result = await response.json();
                 console.log('Response received:', result);
 
-                if (response.ok) {
-                    // Success - show clean message
+                                if (response.ok) {
+                    // Success - show clean message only
                     alert("Request Submitted Successfully! We've received your request and sent you a confirmation email. We'll contact you within 2 hours during business hours.");
                     this.reset(); // Clear form
                 } else {
