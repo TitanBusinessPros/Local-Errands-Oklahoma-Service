@@ -23,22 +23,14 @@ const Contact = () => {
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    
-    // Handle chain of custody note for delivery service
-    if (name === 'serviceType' && value === 'delivery-chain-custody') {
-      console.log('Chain of custody delivery service selected');
-    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submission started', formData);
-    
     setIsSubmitting(true);
 
     try {
       // Store form submission in database
-      console.log('Storing form data in database...');
       const { error: dbError } = await supabase
         .from('contact_submissions')
         .insert([
@@ -54,14 +46,10 @@ const Contact = () => {
         ]);
 
       if (dbError) {
-        console.error('Database error:', dbError);
         throw new Error('Failed to save form data');
       }
 
-      console.log('Form data saved to database successfully');
-
       // Send email notifications via Brevo
-      console.log('Sending email notifications...');
       const { data: emailData, error: emailError } = await supabase.functions.invoke(
         'send-email-notification',
         {
@@ -72,13 +60,9 @@ const Contact = () => {
       );
 
       if (emailError) {
-        console.error('Email function error:', emailError);
         throw new Error('Failed to send email notifications');
       }
 
-      console.log('Email notifications sent successfully:', emailData);
-      
-      // Show clean success message only
       toast({
         title: "Request Submitted Successfully!",
         description: "We've received your request and sent you a confirmation email. We'll contact you within 2 hours during business hours.",
@@ -96,7 +80,6 @@ const Contact = () => {
       });
 
     } catch (error) {
-      console.error('Form submission error:', error);
       toast({
         title: "Submission Error",
         description: "Something went wrong. Please try again or call us directly at (405) 998-8232.",
@@ -116,12 +99,10 @@ const Contact = () => {
               Book Your Oklahoma Errand Service
             </h2>
             <p className="text-xl text-gray-600 mb-2">
-              Tell us what you need help with in Wynnewood, Davis, Pauls Valley,
-              or Sulphur and we'll get back to you quickly
+              Tell us what you need help with in <strong>Wynnewood, Davis, Pauls Valley, or Sulphur</strong> and we'll get back to you quickly
             </p>
             <p className="text-lg text-gray-600">
-              We also offer errand services outside our primary service area!
-              Fill out the form below for a custom quote.
+              We also offer errand services outside our primary service area! Fill out the form below for a custom quote.
             </p>
           </div>
 
@@ -133,10 +114,7 @@ const Contact = () => {
                   Service Request Form
                 </h3>
                 <p className="text-gray-600">
-                  Fill out the details below and we'll contact you within 2
-                  hours during business hours. You'll receive a confirmation email
-                  immediately after submitting. Feel free to text us or email us 24
-                  hours a day for questions or quotes!
+                  Fill out the details below and we'll contact you within 2 hours during business hours. You'll receive a confirmation email immediately after submitting. Feel free to text us or email us 24 hours a day for questions or quotes!
                 </p>
               </div>
 
