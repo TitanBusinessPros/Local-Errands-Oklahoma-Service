@@ -78,7 +78,7 @@ const Contact = () => {
 
       console.log('Email notifications sent successfully:', emailData);
       
-      // Show clean success message
+      // Show clean success message only
       toast({
         title: "Request Submitted Successfully!",
         description: "We've received your request and sent you a confirmation email. We'll contact you within 2 hours during business hours.",
